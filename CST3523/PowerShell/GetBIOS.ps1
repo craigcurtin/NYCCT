@@ -1,0 +1,14 @@
+﻿# simple powershell script to display the BIOS information from the target system
+
+
+param( [string]$strComputer = "." )
+
+$colItems = get-wmiobject -class "Win32_BIOS" -namespace "root\CIMV2" -computername $strComputer
+
+foreach ($objItem in $colItems) {
+	write-host "Name                           :" $objItem.Name
+	write-host "Version                        :" $objItem.Version
+	write-host "Manufacturer                   :" $objItem.Manufacturer
+	write-host "SMBIOSBIOS Version             :" $objItem.SMBIOSBIOSVersion
+	write-host
+}
